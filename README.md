@@ -17,5 +17,40 @@ StageSystem is simple unlock / lock stage in Unity.
 
 ### StageManager
 
-; tldr ;
+; tldr version;
+
 If you want to Unlock next level just call StageManager.UnlockNextLevel();
+
+**Methods**
+
+1. void UnlockLevel(StageButton sButton)
+2. void UnlockLevel(string id)
+3. void LockLevel(StageButton sButton)
+4. void LockLevel(string id)
+5. bool isLevelUnlocked(StageButton sButton)
+6. bool isLevelUnlocked(string id)
+7. void UnlockNextLevel()
+
+### StageButtons
+
+**Variable**
+
+Buttons : a list of StageButton
+
+### StageButton
+
+**Variables**
+
+a. Buttons : button function to change to the stage scene
+b. Id (right after button) : your target scene, act as load scene.
+c. Set to unlock : Set this stage / button to unlock
+d. Next Level ID : your next level, act to unlock next level
+e. Apply : click if done
+
+### StageButtonImplementation
+
+**Variables**
+
+a. id = target level id
+b. nextLevelId = target Next Level Id
+
