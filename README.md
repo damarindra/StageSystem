@@ -7,11 +7,6 @@ StageSystem is simple unlock / lock stage in Unity.
 1. Create / open your stage selection scene.
 2. Add / Create a new gameobject with StageButtons Component (not StageButton, but StageButtons)
 3. Configure Buttons value at the inspector
-	a. Buttons : button function to change to the stage scene
-    b. Id (right after button) : your target scene, act as load scene.
-    c. Set to unlock : Set this stage / button to unlock
-    d. Next Level ID : your next level, act to unlock next level
-    e. Apply : click if done
 
 ## Code Guide
 
@@ -41,16 +36,16 @@ Buttons : a list of StageButton
 
 **Variables**
 
-a. Buttons : button function to change to the stage scene
-b. Id (right after button) : your target scene, act as load scene.
-c. Set to unlock : Set this stage / button to unlock
-d. Next Level ID : your next level, act to unlock next level
-e. Apply : click if done
+1. Buttons : button function to change to the stage scene
+2. Id (right after button) : your target scene, act as load scene.
+3. Set to unlock : Set this stage / button to unlock
+4. Next Level ID : your next level, act to unlock next level
+5. Apply : click if done
 
 ### StageButtonImplementation
 
 **Variables**
 
-a. id = target level id
-b. nextLevelId = target Next Level Id
+1. id = target level id
+2. nextLevelId = target Next Level Id
 
