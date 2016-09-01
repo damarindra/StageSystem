@@ -4,6 +4,8 @@ StageSystem is simple unlock / lock stage in Unity.
 
 ## How To Use
 
+**First of all, add all (used) your scene to Build Settings**
+
 1. Create / open your stage selection scene.
 2. Add / Create a new gameobject with StageButtons Component (not StageButton, but StageButtons)
 3. Configure Buttons value at the inspector
