@@ -21,7 +21,7 @@ namespace DI.StageSystem
 		public bool apply = false;
 		public string nextLevelId;
 	}
-
+	/*
 #if UNITY_EDITOR
 	//[CustomPropertyDrawer(typeof(StageButton))]
 	public class StageButtonDrawer : PropertyDrawer
@@ -68,21 +68,8 @@ namespace DI.StageSystem
 			return EditorGUIUtility.singleLineHeight * 4.5f;
 		}
 
-		public static string[] ReadNames()
-		{
-			List<string> temp = new List<string>();
-			foreach (UnityEditor.EditorBuildSettingsScene S in UnityEditor.EditorBuildSettings.scenes)
-			{
-				if (S.enabled)
-				{
-					string name = S.path.Substring(S.path.LastIndexOf('/') + 1);
-					name = name.Substring(0, name.Length - 6);
-					temp.Add(name);
-				}
-			}
-			return temp.ToArray();
-		}
+		
 	}
 
-#endif
+#endif*/
 }

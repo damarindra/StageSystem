@@ -5,6 +5,7 @@ using UnityEngine.UI;
  *  Damar Inderajati */
 
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -13,7 +14,7 @@ namespace DI.StageSystem
 {
 	public class StageButtons : MonoBehaviour
 	{
-		public StageButton[] buttons;
+		public StageButton[] buttons = new StageButton[0];
 
 		// Use this for initialization
 		void Start()
@@ -41,7 +42,17 @@ namespace DI.StageSystem
 		[MenuItem("Window/StageSystem/Reset")]
 		static void Reset()
 		{
-			foreach (string id in StageButtonDrawer.ReadNames())
+			List<string> temp = new List<string>();
+			foreach (UnityEditor.EditorBuildSettingsScene S in UnityEditor.EditorBuildSettings.scenes)
+			{
+				if (S.enabled)
+				{
+					string name = S.path.Substring(S.path.LastIndexOf('/') + 1);
+					name = name.Substring(0, name.Length - 6);
+					temp.Add(name);
+				}
+			}
+			foreach (string id in temp)
 			{
 				PlayerPrefs.DeleteKey(id + "isUnlocked");
 			}
@@ -60,11 +71,12 @@ namespace DI.StageSystem
 		void OnEnable()
 		{
 			sb = (StageButtons)target;
-			sceneNames = StageButtonDrawer.ReadNames();
+			sceneNames = ReadNames();
 		}
 
 		public override void OnInspectorGUI()
 		{
+
 			EditorGUI.BeginChangeCheck();
 			serializedObject.Update();
 
@@ -81,29 +93,13 @@ namespace DI.StageSystem
 
 					if (!btn.button)
 						GUI.enabled = false;
-					int choosen = 0;
-					for (int i = 0; i < sceneNames.Length; i++)
-					{
-						if (btn.id == sceneNames[i])
-						{
-							choosen = EditorGUILayout.Popup(i, sceneNames, GUILayout.Width(100));
-						}
-					}
-					btn.id = sceneNames[choosen];
+
+					btn.id = sceneNames[EditorGUILayout.Popup(FindIndexScene(btn.id, sceneNames.Length-1), sceneNames, GUILayout.Width(100))];
 
 					EditorGUILayout.EndHorizontal();
 
 					btn.setToUnlock = EditorGUILayout.Toggle("Set To Unlock", btn.setToUnlock);
-
-					choosen = 0;
-					for (int i = 0; i < sceneNames.Length; i++)
-					{
-						if (btn.nextLevelId == sceneNames[i])
-						{
-							choosen = EditorGUILayout.Popup("Next Level ID", i, sceneNames);
-						}
-					}
-					btn.nextLevelId = sceneNames[choosen];
+					btn.nextLevelId = sceneNames[EditorGUILayout.Popup("Next Level ID", FindIndexScene(btn.nextLevelId, sceneNames.Length - 1), sceneNames)];
 
 					if (GUILayout.Button(btn.apply ? "Remove" : "Apply"))
 					{
@@ -129,6 +125,49 @@ namespace DI.StageSystem
 
 		}
 
+		public int FindIndexScene(string id)
+		{
+			if (id == "")
+				return sceneNames.Length - 1;
+			int i = 0;
+			foreach (string str in sceneNames)
+			{
+				if (str.Equals(id))
+					return i;
+				i += 1;
+			}
+			Debug.Log("ID Scene not found : " + id + ", returning -1");
+			return -1;
+		}
+		public int FindIndexScene(string id, int defaultNumb)
+		{
+			if (id == "")
+				return sceneNames.Length - 1;
+			int i = 0;
+			foreach (string str in sceneNames)
+			{
+				if (str.Equals(id))
+					return i;
+				i += 1;
+			}
+			Debug.Log("ID Scene not found : " + id + ", returning " + defaultNumb.ToString());
+			return defaultNumb;
+		}
+		string[] ReadNames()
+		{
+			List<string> temp = new List<string>();
+			foreach (UnityEditor.EditorBuildSettingsScene S in UnityEditor.EditorBuildSettings.scenes)
+			{
+				if (S.enabled)
+				{
+					string name = S.path.Substring(S.path.LastIndexOf('/') + 1);
+					name = name.Substring(0, name.Length - 6);
+					temp.Add(name);
+				}
+			}
+			temp.Add("");
+			return temp.ToArray();
+		}
 	}
 #endif
 }
