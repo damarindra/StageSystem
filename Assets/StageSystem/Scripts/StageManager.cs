@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿/** Originally created by
+ *  Damar Inderajati */
+
+using UnityEngine;
 using System.Collections;
 
 namespace DI.StageSystem

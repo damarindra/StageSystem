@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿/** Originally created by
+ *  Damar Inderajati */
+
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;

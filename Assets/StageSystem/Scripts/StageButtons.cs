@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+/** Originally created by
+ *  Damar Inderajati */
+
 using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
 using UnityEditor;
